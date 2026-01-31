@@ -1,213 +1,61 @@
-# 🚀 AI Financial Analyst - Easy Edition
+# 💹 AI Financial Analyst (Pro Terminal)
 
-A powerful financial analysis system powered by AI agents, optimized for **small PCs** with limited resources.
+A professional-grade, lightweight financial analysis dashboard built for speed and accuracy. This tool uses deterministic quantitative algorithms to provide real-time market insights without requiring heavy AI models or GPUs.
+
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
 ## ✨ Features
 
-- 📊 **Multi-Agent Analysis**: Query analyzer, data fetcher, and code generator working together
-- 💻 **Easy-to-Use UI**: Beautiful Streamlit interface - just click and run!
-- 🎯 **Smart Stock Analysis**: Analyze any stock with natural language queries
-- 🔧 **Flexible AI Backend**: Use Ollama, OpenAI, or train your own small model
-- 📈 **Automated Visualizations**: Generate charts and insights automatically
+- **🚀 Real-Time Analysis**: Instant technical analysis using live market data.
+- **📈 Technical Indicators**: Automated RSI, Bollinger Bands, SMA 50/200, and Golden/Death Cross detection.
+- **📰 Sentiment Scanning**: Aggregates news headlines (via DuckDuckGo) to calculate market sentiment scores.
+- **🐋 Whale Tracking**: Monitors institutional ownership and insider trading activity.
+- **📊 Comparison Engine**: Compare multiple stocks (e.g., `Compare NVDA, AMD, INTC`) in a normalized performance chart.
+- **📄 PDF Reports**: Generate and download professional investment memos in one click.
 
----
+## 🛠️ Installation
 
-## 🎯 Quick Start (3 Steps!)
+### Option 1: Run Locally
 
-### 1. Install Dependencies
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Rayxworld/finacial-analyst.git
+   cd finacial-analyst
+   ```
 
-First, install [uv](https://github.com/astral-sh/uv) (fast Python package manager):
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-# Windows (PowerShell)
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
+3. **Run the app:**
+   ```bash
+   streamlit run app.py
+   ```
 
-Then install project dependencies:
+### Option 2: Cloud Hosting (Free)
 
-```bash
-uv sync
-```
+This app is optimized for **Streamlit Community Cloud**.
+1. Fork this repo.
+2. Go to [share.streamlit.io](https://share.streamlit.io/).
+3. Deploy your repo (Main file: `app.py`).
 
-### 2. Choose Your AI Backend
+## 🧠 How It Works
 
-**Option A: Use Ollama (Recommended for local use)**
+Unlike generic "Chat with Data" bots, this engine uses **Quantitative Deterministic Logic**:
+- **Data Source**: `yfinance` (Yahoo Finance API) for price/volume.
+- **Forecasting**: Uses `scikit-learn` Random Forest to project short-term trendlines.
+- **News**: `duckduckgo-search` for real-time sentiment gathering.
+- **Rendering**: `Plotly` for interactive, institutional-grade framing.
 
-```bash
-# Install Ollama from: https://ollama.com/download
-# Then pull a model:
-ollama pull deepseek-r1:7b
-```
+## 📂 Project Structure
 
-**Option B: Use OpenAI**
+- `app.py`: Main Streamlit dashboard application.
+- `financial_engine.py`: Core logic for routing queries and processing data.
+- `quant_utils.py`: Library of financial calculations (RSI, SMA, forecasting).
+- `report_generator.py`: PDF generation engine.
+- `requirements.txt`: Lightweight dependency list (CPU-only).
 
-Create a `.env` file:
-```
-OPENAI_API_KEY=your_api_key_here
-MODEL_NAME=openai/gpt-4o
-```
-
-**Option C: Train Your Own Model** (see Training section below)
-
-### 3. Run the App
-
-**Windows**: Just double-click `run.bat`
-
-**Or manually**:
-```bash
-uv run streamlit run app.py
-```
-
-That's it! 🎉 The app will open in your browser.
-
----
-
-## 🎓 Training Your Own Model (For Small PCs)
-
-Want to fine-tune a small AI model for financial analysis? This script is optimized for PCs with limited GPU memory (even 4GB works!).
-
-### Prerequisites
-
-- **GPU**: NVIDIA GPU with 4GB+ VRAM (or use Google Colab for free GPU)
-- **CUDA**: Install from [NVIDIA](https://developer.nvidia.com/cuda-downloads)
-
-### Training Steps
-
-1. **Prepare your data** (create `financial_data.json`):
-
-```json
-[
-  {
-    "text": "<|im_start|>system\nYou are a financial analyst.<|im_end|>\n<|im_start|>user\nAnalyze TSLA<|im_end|>\n<|im_start|>assistant\nI'll analyze TSLA stock data...<|im_end|>"
-  }
-]
-```
-
-2. **Run training**:
-
-```bash
-uv run python train.py
-```
-
-The script uses:
-- 🔹 **Small models**: Llama-3.2-1B or Qwen2.5-1.5B (only ~1.5GB!)
-- 🔹 **4-bit quantization**: Reduces memory by 75%
-- 🔹 **LoRA**: Trains only 1% of parameters
-- 🔹 **Optimized with Unsloth**: 2x faster training
-
-3. **Use your trained model**:
-
-Create `.env`:
-```
-MODEL_NAME=local
-LOCAL_MODEL_PATH=./trained_model
-```
-
----
-
-## 📖 Usage Examples
-
-### Using the Streamlit UI
-
-1. Run `run.bat` (Windows) or `uv run streamlit run app.py`
-2. Enter your query: *"Analyze TSLA stock for the last 3 months"*
-3. Click **Analyze**
-4. View the generated code and results!
-
-### Using as MCP Server (Advanced)
-
-Add to Cursor Settings > MCP:
-
-```json
-{
-  "mcpServers": {
-    "financial-analyst": {
-      "command": "uv",
-      "args": [
-        "--directory",
-        "C:\\Users\\PC\\Documents\\ai-engineering-hub\\financial-analyst-deepseek",
-        "run",
-        "mcp",
-        "run",
-        "server.py"
-      ]
-    }
-  }
-}
-```
-
-Then use the `analyze_stock` tool in Cursor!
-
----
-
-## 🎨 Example Queries
-
-- *"What's the current trend for TSLA?"*
-- *"Compare AAPL and MSFT performance over the last year"*
-- *"Show me NVDA's price and volume for the last month"*
-- *"Analyze the correlation between TSLA and NVDA"*
-
----
-
-## 🛠️ Configuration
-
-### Environment Variables
-
-Create a `.env` file to customize:
-
-```bash
-# AI Model Configuration
-MODEL_NAME=ollama/deepseek-r1:7b  # or openai/gpt-4o, or local
-LLM_BASE_URL=http://localhost:11434  # for Ollama
-
-# OpenAI (if using)
-OPENAI_API_KEY=your_key_here
-
-# Local Model (if trained)
-LOCAL_MODEL_PATH=./trained_model
-```
-
----
-
-## 💡 Tips for Small PCs
-
-1. **Use Ollama with smaller models**: `ollama pull deepseek-r1:7b` (not the 14B version)
-2. **Train on Google Colab**: Free GPU access for training
-3. **Close other apps**: When running training or analysis
-4. **Use 4-bit models**: The training script does this automatically
-
----
-
-## 📁 Project Structure
-
-```
-financial-analyst-deepseek/
-├── app.py                 # Streamlit UI (easy mode!)
-├── run.bat               # One-click launcher
-├── finance_crew.py       # Multi-agent system
-├── train.py              # Model training script
-├── server.py             # MCP server
-├── pyproject.toml        # Dependencies
-└── README.md             # You are here!
-```
-
----
-
-## 🐛 Troubleshooting
-
-**"uv not found"**: Install uv first (see Quick Start)
-
-**"Ollama connection failed"**: Make sure Ollama is running (`ollama serve`)
-
-**"Out of memory" during training**: 
-- Use smaller batch size in `train.py`
-- Try Google Colab instead
-- Close other applications
-
-**"Model not found"**: Pull the model first (`ollama pull deepseek-r1:7b`)
-
----
-
-## 📬 Credits
-
-Built with CrewAI, Streamlit, and Unsloth for efficient AI training.
+## 📄 License
+MIT License - Free to use and modify!
