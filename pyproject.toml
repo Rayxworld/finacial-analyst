@@ -1,0 +1,47 @@
+[project]
+name = "financial-analysis-agent"
+version = "0.1.0"
+description = "A CrewAI-based financial analysis system"
+dependencies = [
+    "crewai[tools]>=0.100.0",
+    "matplotlib>=3.10.3",
+    "mcp[cli]>=1.9.1",
+    "pandas>=2.2.3",
+    "pdfplumber>=0.11.6",
+    "pydantic>=2.11.5",
+    "reportlab>=4.4.1",
+    "yfinance>=0.2.61",
+    "streamlit>=1.31.0",
+    "unsloth",
+    "datasets",
+    "trl",
+    "transformers",
+    "torch",
+    "accelerate",
+    "bitsandbytes",
+    "litellm",
+    "apscheduler",
+    "fastapi-sso",
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
+    "sse-starlette",
+    "python-dotenv",
+    "python-dateutil",
+    "duckduckgo-search>=8.1.1",
+    "scikit-learn>=1.8.0",
+    "pandas-datareader>=0.10.0",
+    "plotly>=6.5.2",
+]
+requires-python = ">=3.12"
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+bypass-selection = true

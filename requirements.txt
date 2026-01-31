@@ -1,0 +1,9 @@
+streamlit
+yfinance
+duckduckgo-search>=5.0
+plotly
+pandas
+numpy
+scikit-learn
+fpdf2
+matplotlib
