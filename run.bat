@@ -10,13 +10,12 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-:: Install dependencies
+:: Install dependencies (Lightweight Mode)
 echo Installing dependencies...
-uv sync
+uv pip install -r requirements.txt --system
 
-:: Start Streamlit app using Python module (avoids corrupted .exe issue)
+:: Start Streamlit app
 echo Starting Streamlit UI...
 uv run python -m streamlit run app.py
 
 pause
-
